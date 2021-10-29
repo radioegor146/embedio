@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,6 +26,11 @@ namespace EmbedIO
         /// The prefixes.
         /// </value>
         List<string> Prefixes { get; }
+
+        /// <summary>
+        /// Gets forced listen IP address
+        /// </summary>
+        IPAddress ServerIPAddress { get; }
 
         /// <summary>
         /// Gets a value indicating whether this instance is listening.

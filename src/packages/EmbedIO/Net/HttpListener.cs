@@ -21,16 +21,17 @@ namespace EmbedIO.Net
         private readonly ConcurrentDictionary<string, HttpListenerContext> _ctxQueue;
         private readonly ConcurrentDictionary<HttpConnection, object> _connections;
         private readonly HttpListenerPrefixCollection _prefixes;
+        private readonly System.Net.IPAddress serverIpAddress;
         private bool _disposed;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpListener" /> class.
         /// </summary>
         /// <param name="certificate">The certificate.</param>
-        public HttpListener(X509Certificate? certificate = null)
+        public HttpListener(X509Certificate? certificate = null, System.Net.IPAddress serverIpAddress = null)
         {
             Certificate = certificate;
-
+            this.serverIpAddress = serverIpAddress;
             _prefixes = new HttpListenerPrefixCollection(this);
             _connections = new ConcurrentDictionary<HttpConnection, object>();
             _ctxQueue = new ConcurrentDictionary<string, HttpListenerContext>();
@@ -55,6 +56,8 @@ namespace EmbedIO.Net
         /// The certificate.
         /// </value>
         internal X509Certificate? Certificate { get; }
+
+        public System.Net.IPAddress ServerIPAddress => serverIpAddress;
 
         /// <inheritdoc />
         public void Start()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,6 +34,8 @@ namespace EmbedIO.Net.Internal
 
         /// <inheritdoc />
         public string Name { get; } = "Microsoft HTTP Listener";
+
+        public IPAddress ServerIPAddress => null;
 
         /// <inheritdoc />
         public void Start() => _httpListener.Start();

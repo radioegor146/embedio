@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using EmbedIO.Net;
 using EmbedIO.Utilities;
 
 namespace EmbedIO
@@ -27,6 +28,18 @@ namespace EmbedIO
         public static WebServerOptions WithUrlPrefix(this WebServerOptions @this, string prefix)
         {
             @this.AddUrlPrefix(prefix);
+            return @this;
+        }
+
+        /// <summary>
+        /// Sets server IP address.
+        /// </summary>
+        /// <param name="this">The <see cref="WebServerOptions"/> on which this method is called.</param>
+        /// <param name="ipAddress">The IP address on listen to (supported only with <see cref="HttpListener"/>)</param>
+        /// <returns></returns>
+        public static WebServerOptions WithServerIPAddress(this WebServerOptions @this, System.Net.IPAddress ipAddress)
+        {
+            @this.ServerIPAddress = ipAddress;
             return @this;
         }
 

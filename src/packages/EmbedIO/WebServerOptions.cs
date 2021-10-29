@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
+using EmbedIO.Net;
 using EmbedIO.Utilities;
 using Swan;
 using Swan.Logging;
@@ -34,6 +35,11 @@ namespace EmbedIO
         private StoreName _storeName = StoreName.My;
 
         private StoreLocation _storeLocation = StoreLocation.LocalMachine;
+
+        /// <summary>
+        /// Gets or sets the server IP address (only available on <see cref="HttpListener"/>).
+        /// </summary>
+        public System.Net.IPAddress ServerIPAddress { get; set; } = null;
 
         /// <summary>
         /// Gets the URL prefixes.

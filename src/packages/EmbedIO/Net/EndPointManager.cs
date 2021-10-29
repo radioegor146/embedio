@@ -84,7 +84,7 @@ namespace EmbedIO.Net
 
         private static EndPointListener GetEpListener(string host, int port, HttpListener listener, bool secure = false)
         {
-            var address = ResolveAddress(host);
+            var address = listener.ServerIPAddress ?? ResolveAddress(host);
 
             var p = IPToEndpoints.GetOrAdd(address, x => new ConcurrentDictionary<int, EndPointListener>());
             return p.GetOrAdd(port, x => new EndPointListener(listener, address, x, secure));
