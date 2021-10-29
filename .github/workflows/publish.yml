@@ -25,4 +25,4 @@ jobs:
         NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
       run: |
         export VERSION=$(cat VERSION)
-        dotnet nuget push "distrib\Release\EmbedIO.$VERSION.nupkg" --api-key $NUGET_PUBLISH_KEY --source https://api.nuget.org/v3/index.json
+        dotnet nuget push "distrib/Release/EmbedIO.$VERSION.nupkg" --api-key $NUGET_PUBLISH_KEY --source https://api.nuget.org/v3/index.json
