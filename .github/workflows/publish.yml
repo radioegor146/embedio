@@ -19,7 +19,7 @@ jobs:
     #- name: Test with dotnet
     #  run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:Exclude=[NUnit3.TestAdapter]* ./src/tests/EmbedIO.Tests/EmbedIO.Tests.csproj -c Release
     - name: Pack with dotnet
-      run: dotnet pack --configuration Release ./src/packages/EmbedIO/EmbedIO.csproj
+      run: dotnet pack -p:PackageID=radioegor146.EmbedIO --configuration Release ./src/packages/EmbedIO/EmbedIO.csproj
     - name: Publish to nuget
       env:
         NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
