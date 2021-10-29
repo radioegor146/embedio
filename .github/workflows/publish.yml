@@ -1,0 +1,28 @@
+name: .NET Core CI publish
+
+on:
+  push:
+    branches:
+      - 'nuget-release'
+
+jobs:
+  test:
+    name: Test and publish
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.100
+    - name: Test with dotnet
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:Exclude=[NUnit3.TestAdapter]* ./src/tests/EmbedIO.Tests/EmbedIO.Tests.csproj -c Release
+    - name: Pack with dotnet
+      run: dotnet pack --configuration Release ./src/packages/EmbedIO/EmbedIO.csproj
+    - name: Publish to nuget
+      env:
+        NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
+      run: |
+        export VERSION=$(cat VERSION)
+        dotnet nuget push "distrib\Release\EmbedIO.$VERSION.nupkg" --api-key $NUGET_PUBLISH_KEY --source "github"
